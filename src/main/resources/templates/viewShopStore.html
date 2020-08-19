@@ -1,0 +1,46 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-4" th:width="1600px">
+    <a th:href="@{|/newPicture/ ${idShopStore}}" class="btn btn-warning">Agregar nuevo cuadro</a>
+    <a th:href="@{/listShopStore}" class="btn btn-warning" >Ver tiendas</a>
+    <table class="table">
+<!--    <table class="table">-->
+        <thead class="caption">
+        <tr>
+            <th>ID</th>
+            <th >NAME</th>
+            <th >AUTOR</th>
+            <th >PRECIO</th>
+            <th >FECHA</th>
+            <th >ID STORE</th>
+        </tr>
+        </thead>
+        <tbody >
+        <tr th:each="picture:${viewStore}" >
+            <td th:text="${picture.idPicture}"></td>
+            <td th:text="${picture.name}"></td>
+            <td th:text="${picture.author}"></td>
+            <td th:text="${picture.price}"></td>
+            <td th:text="${picture.date}"></td>
+            <td th:text="${idShopStore}"></td>
+            <td th:width="300px">
+                <a th:href="@{|/editar/ ${picture.idPicture}}" class="btn btn-warning">Editar</a>
+                <a th:href="@{|/delete/ ${picture.idPicture}}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="/funciones.js"></script>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

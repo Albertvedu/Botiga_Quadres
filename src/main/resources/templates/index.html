@@ -1,0 +1,43 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-4">
+    <a href="/new" class="btn btn-warning">Agregar nueva tienda</a>
+<!--    <a href="/prueba" class="btn btn-warning">Buscar por categoria </a>-->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>CAPACITY</th>
+            <th>STOCK</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="shop:${shopStore}">
+
+            <td th:text="${shop.idStore}"></td>
+            <td th:text="${shop.name}"></td>
+            <td th:text="${shop.capacity}"></td>
+            <td th:text="${pictureList}"></td>
+            <td>
+                <a th:href="@{|/viewShopStore/ ${shop.idStore}}" class="btn btn-warning">Ver tienda</a>
+                <a th:href="@{|/editar/ ${shop.idStore}}" class="btn btn-warning">Editar</a>
+                <a th:href="@{|/delete/ ${shop.idStore}}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+        <script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="/funciones.js"></script>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

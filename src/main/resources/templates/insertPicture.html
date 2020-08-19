@@ -1,0 +1,48 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container mt-4">
+        <form action="#" th:action="@{/insertPicture}"  th:object="${picture}" method="post" class="col-sm-5">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Insert Picture</h4>
+                </div>
+                <div class="card-body">
+
+
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" th:field = "*{name} " class="form-control">
+<!--                        <td th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Name Error</td><br>-->
+<!--                        <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->
+
+                        <label>Autor</label>
+                        <input type="text" th:field=" *{author} " class="form-control">
+<!--                        <small class="form-text text-danger" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></small>-->
+                        <label>Precio</label>
+                        <input type="text" th:field=" *{price} " class="form-control">
+                        <label>Fecha entrada</label>
+                        <input type="date" th:name="Date" class="form-control"
+                               th:value="${standardDate}"/>
+                        <hr color="blue" size=3>
+                        <label>ID Shop Store</label>
+                        <input type="text" name="idStore"
+                               readonly="readonly"
+                               class="form-control"
+                               th:value="${idShopStore}"/>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <input type="submit" value="Guardar" class="btn btn-info">
+                    <a th:href="@{|/viewShopStore/ ${picture.idPicture}}" class="btn btn-link">Regresar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
