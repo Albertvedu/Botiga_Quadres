@@ -31,6 +31,11 @@ public class PictureService implements IPictureService{
     }
 
     @Override
+    public Picture findByIdPicture(Integer id) {
+        return repo.findByIdPicture(id);
+    }
+
+    @Override
     public boolean existsById(Integer integer) {
         return false;
     }
@@ -51,8 +56,8 @@ public class PictureService implements IPictureService{
     }
 
     @Override
-    public void deleteById(Integer integer) {
-
+    public void deleteById(Integer id) {
+        repo.deleteById(id);
     }
 
     @Override

@@ -1,0 +1,59 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Insert title here</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-5">
+    <form action="/actualizarPicture" th:object="${picture}" method="POST" class="col-sm-5">
+        <div class="card">
+            <div class="card-header">
+                <h4>Actualizar cuadro</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label>ID STORE</label>
+                    <input type="text" name="idStore"
+                           readonly="readonly"
+                           class="form-control"
+                           th:value="${picture.idStore}"/>
+                </div>
+                <div class="form-group">
+                    <label>ID PICTURE</label>
+                    <input type="text" name="idPicture"
+                           readonly="readonly"
+                           class="form-control"
+                           th:value="${picture.idPicture}"/>
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" th:field="*{name}"
+                           class="form-control"
+                           th:value= "${picture.name}"/>
+                    <label>Autor</label>
+                    <input type="text" th:field="*{author}"
+                           class="form-control"
+                           th:value= "${picture.author}"/>
+                    <label>Precio</label>
+                    <input type="text" th:field="*{price}"
+                           class="form-control"
+                           th:value= "${price}"/>
+                    <label>Fecha</label>
+                    <input type="text" name="date"
+                           readonly="readonly"
+                           class="form-control"
+                           th:value="${picture.date}"/>
+                </div>
+
+            </div>
+            <div class="card-footer">
+                <input type="submit" value="ActualizarPicture" class="btn btn-info">
+                <a th:href="@{|/viewShopStore/ ${picture.idStore}}"  class="btn btn-link">Regresar</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

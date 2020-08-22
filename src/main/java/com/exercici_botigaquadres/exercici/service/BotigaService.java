@@ -1,7 +1,9 @@
 package com.exercici_botigaquadres.exercici.service;
 
+import com.exercici_botigaquadres.exercici.model.Picture;
 import com.exercici_botigaquadres.exercici.model.ShopStore;
 import com.exercici_botigaquadres.exercici.repository.IBotigaRepo;
+import com.exercici_botigaquadres.exercici.repository.IPictureRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,9 @@ public abstract class BotigaService implements IBotigaService{
 
     @Autowired
     private IBotigaRepo repo;
+
+    @Autowired
+    private IPictureRepo repoPicture;
 
     @Override
     public <S extends ShopStore> S save(S shopStore) {

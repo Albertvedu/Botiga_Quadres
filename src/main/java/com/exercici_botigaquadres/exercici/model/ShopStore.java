@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "shop_store")
 public class ShopStore {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idStore")
     private int idStore;
     @Column(name="Name")
@@ -17,17 +17,20 @@ public class ShopStore {
     private int capacity;
 
 
-    @OneToMany(mappedBy="shopStore")
-    private List<Picture> pictureList = new ArrayList<>(capacity);
-
+    @OneToMany(mappedBy="homeshopStore" , fetch = FetchType.LAZY)
+    private List<Picture> pictureList ;
 
     public ShopStore() {
+        super();
+        pictureList = new ArrayList<>();
     }
 
-    public ShopStore(int idStore, String name, int capacity) {
+    public ShopStore(int idStore, String name, int capacity, List<Picture> pictureList) {
+        super();
         this.idStore = idStore;
         this.name = name;
         this.capacity = capacity;
+        this.pictureList = pictureList;
     }
 
     public int getIdStore() {
@@ -42,8 +45,9 @@ public class ShopStore {
         return pictureList;
     }
 
-    public void setPictureList(List<Picture> picture) {
-        this.pictureList = picture;
+    public void setPictureList(Picture picture) {
+
+        this.pictureList.add(picture);
     }
 
     public String getName() {

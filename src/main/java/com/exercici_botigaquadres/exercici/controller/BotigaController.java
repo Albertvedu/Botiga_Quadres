@@ -28,7 +28,8 @@ public class BotigaController {
         ShopStore shopStore = new ShopStore();
         List<ShopStore> shopStoreList= botigaService.findAll();
         model.addAttribute("shopStore", shopStoreList);
-        model.addAttribute("pictureList", pictureService.count());
+//        model.addAttribute("pictureList", shopStore.getPictureList().size());
+        System.out.println("bla bla bla list: " + shopStore.getPictureList().size() );
         return "index";
     }
 
@@ -51,7 +52,6 @@ public class BotigaController {
     }
     @PostMapping("/actualizar")
     public String actualizar(@Validated ShopStore shopStore){
-        System.out.println("probando id 222:............... " + shopStore.getIdStore() + "  " + shopStore.getName()+ "  "+ shopStore.getCapacity());
         botigaService.save(shopStore);
         return "redirect:/listShopStore";
     }

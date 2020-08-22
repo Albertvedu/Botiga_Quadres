@@ -1,8 +1,6 @@
 package com.exercici_botigaquadres.exercici.repository;
 
 import com.exercici_botigaquadres.exercici.model.Picture;
-import com.exercici_botigaquadres.exercici.model.ShopStore;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +30,11 @@ public class PictureRepository implements IPictureRepo{
     }
 
     @Override
+    public Picture findByIdPicture(Integer id) {
+        return findByIdPicture(id);
+    }
+
+    @Override
     public boolean existsById(Integer integer) {
         return false;
     }
@@ -53,8 +56,8 @@ public class PictureRepository implements IPictureRepo{
     }
 
     @Override
-    public void deleteById(Integer integer) {
-
+    public void deleteById(Integer id) {
+        deleteById(id);
     }
 
     @Override

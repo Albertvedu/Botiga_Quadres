@@ -13,8 +13,6 @@
                     <h4>Insert Picture</h4>
                 </div>
                 <div class="card-body">
-
-
                     <div class="form-group">
                         <label>Nombre</label>
                         <input type="text" th:field = "*{name} " class="form-control">
@@ -27,8 +25,8 @@
                         <label>Precio</label>
                         <input type="text" th:field=" *{price} " class="form-control">
                         <label>Fecha entrada</label>
-                        <input type="date" th:name="Date" class="form-control"
-                               th:value="${standardDate}"/>
+                        <input type="text" th:name="date" class="form-control"
+                               readonly = "readonly" th:value="${standardDate}"/>
                         <hr color="blue" size=3>
                         <label>ID Shop Store</label>
                         <input type="text" name="idStore"
@@ -39,7 +37,7 @@
                 </div>
                 <div class="card-footer">
                     <input type="submit" value="Guardar" class="btn btn-info">
-                    <a th:href="@{|/viewShopStore/ ${picture.idPicture}}" class="btn btn-link">Regresar</a>
+                    <a th:href="@{|/viewShopStore/ ${idShopStore}}" class="btn btn-link">Regresar</a>
                 </div>
             </div>
         </form>
