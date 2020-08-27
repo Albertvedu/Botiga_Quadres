@@ -7,6 +7,7 @@ import com.exercici_botigaquadres.exercici.service.IPictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,21 +26,20 @@ public class BotigaController {
 
     @GetMapping("/listShopStore")
     public String listarShopStore(Model model){
-        ShopStore shopStore = new ShopStore();
         List<ShopStore> shopStoreList= botigaService.findAll();
         model.addAttribute("shopStore", shopStoreList);
-//        model.addAttribute("pictureList", shopStore.getPictureList().size());
-        System.out.println("bla bla bla list: " + shopStore.getPictureList().size() );
         return "index";
     }
 
     @GetMapping("/new")
     public String nuevo(ShopStore shopStore){
-
         return "insert";
     }
     @PostMapping("insert")
-    public String insert(@Validated ShopStore shopStore){
+    public String insert(@Validated ShopStore shopStore, BindingResult result){
+        if (result.hasErrors()) {
+            return "insert";
+        }
         botigaService.save(shopStore);
         return "redirect:/listShopStore";
     }

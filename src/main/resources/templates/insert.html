@@ -18,12 +18,12 @@
                     <div class="form-group">
                         <label>Nombre</label>
                         <input type="text" th:field = "*{name} " class="form-control">
-<!--                        <td th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}">Name Error</td><br>-->
-<!--                        <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>-->
+<!--                        <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td><br>-->
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
 
                         <label>Capacidad</label>
                         <input type="text" th:field=" *{capacity} " class="form-control">
-<!--                        <small class="form-text text-danger" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></small>-->
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></small>
 
                         <hr color="blue" size=3>
                     </div>

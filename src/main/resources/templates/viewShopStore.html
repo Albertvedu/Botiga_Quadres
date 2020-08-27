@@ -29,16 +29,12 @@
             <td th:text="${picture.price}"></td>
             <td th:text="${picture.date}"></td>
             <td th:text="${idShopStore}"></td>
+
             <td th:width="300px">
                 <a th:href="@{|/editarPicture/ ${picture.idPicture}}" class="btn btn-warning">Editar</a>
-                <a th:href="@{|/deletePicture/ ${picture.idPicture}/ ${idShopStore}}" class="btn btn-danger">Eliminar</a>
+                <a th:href="@{|/deletePicture/ ${picture.idPicture}/ ${idShopStore}}" class="btn btn-danger" onclick="return confirm('Estás seguro que deseas eliminar el registro?');">Eliminar registro</a>
             </td>
         </tr>
-        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-        <script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="/funciones.js"></script>
         </tbody>
     </table>
 </div>

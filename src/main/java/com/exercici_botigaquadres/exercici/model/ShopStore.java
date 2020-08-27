@@ -1,5 +1,9 @@
 package com.exercici_botigaquadres.exercici.model;
 
+import org.springframework.lang.NonNull;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.*;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +15,23 @@ public class ShopStore {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idStore")
     private int idStore;
+    @NotEmpty
     @Column(name="Name")
     private String name;
+    //@NotEmpty(message = "Please enter name")
+    //@Pattern(regexp = "[0-9]+", message="Solo números\n")
+    @NonNull
     @Column(name="Capacity")
     private int capacity;
 
 
-    @OneToMany(mappedBy="homeshopStore" , fetch = FetchType.LAZY)
+
+//    @JoinTable(name = "picture_in_shop"
+//            ,joinColumns=@JoinColumn(name = "pictureId", referencedColumnName = "IdPicture")
+//            ,inverseJoinColumns = @JoinColumn(name = "shopStoreId", referencedColumnName = "IdStore")
+//    )
+   // @OrderColumn(name="picture_number", nullable = true)
+    @OneToMany(mappedBy="shopStoreMany" , fetch = FetchType.LAZY,  cascade=CascadeType.ALL)
     private List<Picture> pictureList ;
 
     public ShopStore() {

@@ -1,4 +1,4 @@
-function eliminar(id) {
+function delete(id) {
     console.log(id);
     swal({
         title: "Esta seguro de Eliminar?",
@@ -10,7 +10,7 @@ function eliminar(id) {
         .then((OK) => {
             if (OK) {
                 $.ajax({
-                    url:"/eliminar/"+id,
+                    url:"/delete/"+id,
                     success: function(res) {
                         console.log(res);
                     },
@@ -19,7 +19,7 @@ function eliminar(id) {
                     icon: "success",
                 }).then((ok)=>{
                     if(ok){
-                        location.href="/listar";
+                        location.href="/listShopStore";
                     }
                 });
             }

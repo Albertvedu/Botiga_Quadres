@@ -4,6 +4,17 @@
     border-left: solid 1px #ccc;
     border-right: solid 1px #ccc;
 }
+.block {
+    display: block;
+    width: 100%;
+    border: none;
+    background-color: red;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 8px;
+}
 /*#background-head {*/
 /*    background: #bba9a9;*/
 /*}*/

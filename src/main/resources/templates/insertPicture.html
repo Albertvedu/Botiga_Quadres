@@ -21,9 +21,11 @@
 
                         <label>Autor</label>
                         <input type="text" th:field=" *{author} " class="form-control">
-<!--                        <small class="form-text text-danger" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></small>-->
+
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></small>
                         <label>Precio</label>
                         <input type="text" th:field=" *{price} " class="form-control">
+<!--                        <small class="form-text text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></small>-->
                         <label>Fecha entrada</label>
                         <input type="text" th:name="date" class="form-control"
                                readonly = "readonly" th:value="${standardDate}"/>

@@ -1,13 +1,12 @@
 package com.exercici_botigaquadres.exercici.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -16,31 +15,38 @@ public class Picture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name="idPicture")
+    @Column(name="idPicture", unique = true)
     private int idPicture;
 
+    @NotEmpty
     @Column(name="Name")
     private String name;
+    @NotEmpty
     @Column(name="Author")
     private String author;
+    //@NonNull
     @Column(name="Price")
     private double price;
     @Column(name="Date")
     Date date;
+//    @JoinColumn(name = "picture_number")
+//    private int cosas;
 
-    @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
-    @JoinTable(name = "shop_pictures"
-                ,joinColumns=@JoinColumn(name = "idPicture", referencedColumnName = "idPicture")
-                ,inverseJoinColumns = @JoinColumn(name = "idStore", referencedColumnName = "idStore")
-    )
-    //@JoinColumn(name="idStore", insertable = false, updatable = false)
-    private ShopStore homeshopStore;
+  //  @ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.MERGE)
+//    @JoinTable(name = "picture_in_shop"
+//                ,joinColumns=@JoinColumn(name = "PICTURE_ID", referencedColumnName = "IdPicture")
+//                ,inverseJoinColumns = @JoinColumn(name = "SHOPSTORE_ID", referencedColumnName = "IdStore")
+//    )
+    @ManyToOne (fetch = FetchType.LAZY,  cascade=CascadeType.REFRESH)
+    @JoinColumn(name="idStore", insertable = false, updatable = false)
+    private ShopStore shopStoreMany;
 
     @Column(name = "idStore")
     private int idStore;
 
     public Picture() {
 //        super();
+
     }
 
     public Picture(int idPicture, String name, String author, double price, ShopStore shopStore) {
@@ -49,9 +55,19 @@ public class Picture {
         this.name = name;
         this.author = author;
         this.price = price;
-        //this.date = date;
-        this.homeshopStore = shopStore;
+        this.shopStoreMany = shopStore;
+       // this.picture_number = picture_number;
     }
+//
+//    public int getCosas() {
+//        ShopStore shopStore = new ShopStore();
+//
+//        return cosas;
+//    }
+//
+//    public void setCosas(int cosas) {
+//        this.cosas = cosas;
+//    }
 
     public int getIdStore() {
         return idStore;
@@ -70,11 +86,11 @@ public class Picture {
     }
 
     public ShopStore getShopStore() {
-        return homeshopStore;
+        return shopStoreMany;
     }
 
     public void setShopStore(ShopStore shopStore) {
-        this.homeshopStore = shopStore;
+        this.shopStoreMany = shopStore;
     }
 
     public String getName() {
