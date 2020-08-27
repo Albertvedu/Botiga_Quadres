@@ -204,7 +204,7 @@
 			"response": []
 		},
 		{
-			"name": "Delete Picture",
+			"name": "Delete Picture para Navegador",
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -218,6 +218,27 @@
 					"path": [
 						"deletePicture",
 						"1",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Picture con Postman",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/deletePictureParaPostman/2/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deletePictureParaPostman",
+						"2",
 						"2"
 					]
 				}

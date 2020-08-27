@@ -70,6 +70,11 @@ public class PictureController {
         pictureService.save(picture);
         return "redirect:/viewShopStore/" + picture.getIdStore();
     }
+    @DeleteMapping("/deletePictureParaPostman/{id}/{idStore}")
+    public String deletePictureParaPostman(@PathVariable("id") int id, @PathVariable int idStore){
+        pictureService.deleteById(id);
+        return "redirect:/viewShopStore/" + idStore;
+    }
     @GetMapping("/deletePicture/{id}/{idStore}")
     public String deletePicture(@PathVariable("id") int id, @PathVariable int idStore){
         pictureService.deleteById(id);
