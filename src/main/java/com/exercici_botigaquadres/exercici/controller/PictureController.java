@@ -5,16 +5,12 @@ import com.exercici_botigaquadres.exercici.model.ShopStore;
 import com.exercici_botigaquadres.exercici.service.IBotigaService;
 import com.exercici_botigaquadres.exercici.service.IPictureService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.format.annotation.DateTimeFormat;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -43,17 +39,11 @@ public class PictureController {
         model.addAttribute("standardDate", picture.getDate());
         return "insertPicture";
     }
-    @InitBinder
-    public void miBinder(WebDataBinder binder){
 
-        StringTrimmerEditor recortaEspacios = new StringTrimmerEditor(true);
-        binder.registerCustomEditor(String.class, recortaEspacios);
-
-    }
     @PostMapping("insertPicture")
     public String insertPicture(@Validated Picture picture, BindingResult result){
         if (result.hasErrors()) {
-            return "insert";
+            return "insertPicture";
         }
         pictureService.save(picture);
         return "redirect:/viewShopStore/" + picture.getIdStore();

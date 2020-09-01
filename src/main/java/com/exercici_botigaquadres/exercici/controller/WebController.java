@@ -18,7 +18,7 @@ public class WebController implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/listShopStore").setViewName("listShopStore");
-       // registry.addViewController("/viewShopStore").setViewName("viewShopStore");
+        registry.addViewController("/viewShopStore/{idStore}").setViewName("viewShopStore");
     }
 
     @GetMapping("/")
@@ -34,17 +34,17 @@ public class WebController implements WebMvcConfigurer {
         }
         return "redirect:/listShopStore";
     }
-//    @GetMapping("/b")
-//    public String showForm(Picture picture) {
-//        return "newPicture";
-//    }
-//
-//    @PostMapping("/b")
-//    public String checkPersonInfo(@Validated Picture picture, BindingResult bindingResult) {
-//
-//        if (bindingResult.hasErrors()) {
-//            return "newPicture";
-//        }
-//        return "redirect:/viewShopStore/"+ picture.getIdStore();
-//    }
+    @GetMapping("/b")
+    public String showForm(Picture picture) {
+        return "newPicture";
+    }
+
+    @PostMapping("/b")
+    public String checkPersonInfo(@Validated Picture picture, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "newPicture";
+        }
+        return "redirect:/viewShopStore/"+ picture.getIdStore();
+    }
 }

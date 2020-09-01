@@ -1,6 +1,5 @@
 package com.exercici_botigaquadres.exercici.controller;
 
-import com.exercici_botigaquadres.exercici.model.Picture;
 import com.exercici_botigaquadres.exercici.model.ShopStore;
 import com.exercici_botigaquadres.exercici.service.IBotigaService;
 import com.exercici_botigaquadres.exercici.service.IPictureService;
@@ -24,7 +23,7 @@ public class BotigaController {
     @Autowired
     private IPictureService pictureService;
 
-    @GetMapping("/listShopStore")
+    @GetMapping("/list")
     public String listarShopStore(Model model){
         List<ShopStore> shopStoreList= botigaService.findAll();
         model.addAttribute("shopStore", shopStoreList);
