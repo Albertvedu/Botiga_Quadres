@@ -1,17 +1,20 @@
 package com.exercici_botigaquadres.exercici.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
 @Table(name = "picture")
-public class Picture {
+public class Picture implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -37,6 +40,7 @@ public class Picture {
 //                ,joinColumns=@JoinColumn(name = "PICTURE_ID", referencedColumnName = "IdPicture")
 //                ,inverseJoinColumns = @JoinColumn(name = "SHOPSTORE_ID", referencedColumnName = "IdStore")
 //    )
+    @JsonIgnore
     @ManyToOne (fetch = FetchType.LAZY,  cascade=CascadeType.REFRESH)
     @JoinColumn(name="idStore", insertable = false, updatable = false)
     private ShopStore shopStoreMany;

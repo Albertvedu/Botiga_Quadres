@@ -16,6 +16,11 @@ public abstract class BotigaRepository implements IBotigaRepo{
     }
 
     @Override
+    public Optional<ShopStore> findById(Integer id) {
+        return findById(id);
+    }
+
+    @Override
     public ShopStore findByIdStore(Integer id){
 
         ShopStore shopStore = findByIdStore(id);

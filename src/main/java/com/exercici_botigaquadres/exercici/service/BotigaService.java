@@ -35,6 +35,11 @@ public abstract class BotigaService implements IBotigaService{
     }
 
     @Override
+    public Optional<ShopStore> findById(Integer id) {
+        return repo.findById(id);
+    }
+
+    @Override
     public boolean existsById(Integer integer) {
         return false;
     }

@@ -6,14 +6,15 @@ import com.exercici_botigaquadres.exercici.service.IBotigaService;
 import com.exercici_botigaquadres.exercici.service.IPictureService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping
 public class PictureController {
     @Autowired
@@ -22,56 +23,39 @@ public class PictureController {
     IBotigaService botigaService;
 
     @GetMapping("/viewShopStore/{idStore}")
-    public String viewShopStore(@PathVariable Integer idStore, Model model, ShopStore shopStore){
+    public ResponseEntity<List<Picture>> viewShopStore(@PathVariable Integer idStore, Model model, ShopStore shopStore){
         List<Picture> pictureList= pictureService.findAllByIdStore(idStore);
-        model.addAttribute("viewStore", pictureList);
-        model.addAttribute("idShopStore", idStore);
-        //
-         //model.addAttribute("picture_number", shopStore.getPicture_number());
-        return "viewShopStore";
-    }
-    @GetMapping("/newPicture/{idStore}")
-    public String newPicture(@PathVariable Integer idStore, Picture picture, Model model){
-        verificarStock(idStore);
-        model.addAttribute( "picture", new Picture());
-        model.addAttribute("idShopStore", idStore);
-        model.addAttribute("standardDate", picture.getDate());
-        return "insertPicture";
+
+        if (pictureList == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(pictureList);
+        }
     }
 
     @PostMapping("insertPicture")
-    public String insertPicture(@Validated Picture picture, BindingResult result){
+    public ResponseEntity<Picture> insertPicture(@Validated Picture picture, BindingResult result) throws Exception {
         if (result.hasErrors()) {
-            return "insertPicture";
+            throw new Exception("No puede haber campos vacios !" );
         }
         pictureService.save(picture);
-        return "redirect:/viewShopStore/" + picture.getIdStore();
+        return new ResponseEntity<Picture>(picture, HttpStatus.OK);
     }
     @GetMapping("/editarPicture/{id}")
     public String editarPicture(@PathVariable Integer id, Model model){
 
         Picture picture = pictureService.findByIdPicture(id);
-        model.addAttribute("picture", picture);
+
         return "editarPicture";
     }
     @PostMapping("/actualizarPicture")
-    public String actualizarPicture(@Validated Picture picture){
+    public ResponseEntity<Picture> actualizarPicture(@Validated Picture picture){
         pictureService.save(picture);
-        return "redirect:/viewShopStore/" + picture.getIdStore();
+        return  new ResponseEntity<Picture>(picture, HttpStatus.OK);
     }
-    @DeleteMapping("/deletePictureParaPostman/{id}/{idStore}")
-    public String deletePictureParaPostman(@PathVariable("id") int id, @PathVariable int idStore){
+    @DeleteMapping("/deletePicture/{id}/{idStore}")
+    public HttpStatus deletePicture(@PathVariable("id") int id, @PathVariable int idStore){
         pictureService.deleteById(id);
-        return "redirect:/viewShopStore/" + idStore;
-    }
-    @GetMapping("/deletePicture/{id}/{idStore}")
-    public String deletePicture(@PathVariable("id") int id, @PathVariable int idStore){
-        pictureService.deleteById(id);
-        return "redirect:/viewShopStore/" + idStore;
-    }
-
-    void verificarStock(Integer idStore){
-        ShopStore shopStore = botigaService.findByIdStore(idStore);
-        if( shopStore.getPictureList().size() >= shopStore.getCapacity()) System.out.println("laerta");
+        return HttpStatus.OK;
     }
 }

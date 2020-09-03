@@ -1,16 +1,19 @@
 package com.exercici_botigaquadres.exercici.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.lang.NonNull;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.*;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "shop_store")
-public class ShopStore {
+public class ShopStore implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="idStore")
@@ -31,6 +34,8 @@ public class ShopStore {
 //            ,inverseJoinColumns = @JoinColumn(name = "shopStoreId", referencedColumnName = "IdStore")
 //    )
    // @OrderColumn(name="picture_number", nullable = true)
+    @JsonIgnore
+    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy="shopStoreMany" , fetch = FetchType.LAZY,  cascade=CascadeType.ALL)
     private List<Picture> pictureList ;
 

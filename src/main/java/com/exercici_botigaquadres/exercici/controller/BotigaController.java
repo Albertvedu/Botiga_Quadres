@@ -4,18 +4,17 @@ import com.exercici_botigaquadres.exercici.model.ShopStore;
 import com.exercici_botigaquadres.exercici.service.IBotigaService;
 import com.exercici_botigaquadres.exercici.service.IPictureService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
-@Controller
+@RestController
 @RequestMapping
 public class BotigaController {
     @Autowired
@@ -24,39 +23,33 @@ public class BotigaController {
     private IPictureService pictureService;
 
     @GetMapping("/list")
-    public String listarShopStore(Model model){
+    public ResponseEntity<List<ShopStore>> listarShopStore(Model model){
         List<ShopStore> shopStoreList= botigaService.findAll();
-        model.addAttribute("shopStore", shopStoreList);
-        return "index";
+
+        if (shopStoreList == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(shopStoreList);
+        }
     }
 
-    @GetMapping("/new")
-    public String nuevo(ShopStore shopStore){
-        return "insert";
-    }
     @PostMapping("insert")
-    public String insert(@Validated ShopStore shopStore, BindingResult result){
+    public ResponseEntity<ShopStore> insert(@Validated ShopStore shopStore, BindingResult result) throws Exception {
         if (result.hasErrors()) {
-            return "insert";
+             throw new Exception("No puede haber campos vacios !" + shopStore.getIdStore());
         }
         botigaService.save(shopStore);
-        return "redirect:/listShopStore";
+        return new ResponseEntity<ShopStore>(shopStore, HttpStatus.OK);
     }
-    @GetMapping("/editar/{id}")
-    public String editar(@PathVariable Integer id, Model model){
 
-        ShopStore shopStore = botigaService.findByIdStore(id);
-        model.addAttribute("shopStore", shopStore);
-        return "editar";
-    }
     @PostMapping("/actualizar")
-    public String actualizar(@Validated ShopStore shopStore){
+    public ResponseEntity<ShopStore> actualizar(@Validated ShopStore shopStore){
         botigaService.save(shopStore);
-        return "redirect:/listShopStore";
+        return  new ResponseEntity<ShopStore>(shopStore, HttpStatus.OK);
     }
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id){
-        botigaService.deleteById(id);
-        return "redirect:/listShopStore";
+    @DeleteMapping("/delete/{idStore}")
+    public HttpStatus deleteStoreParaPostman(@PathVariable int idStore){
+        botigaService.deleteById(idStore);
+        return HttpStatus.OK;
     }
 }
