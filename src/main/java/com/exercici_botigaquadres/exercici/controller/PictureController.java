@@ -23,7 +23,6 @@ public class PictureController {
 
     @GetMapping("/viewShopStore/{idStore}")
     public String viewShopStore(@PathVariable Integer idStore, Model model, ShopStore shopStore){
-        System.out.println("id de picture store: " + idStore);
         List<Picture> pictureList= pictureService.findAllByIdStore(idStore);
         model.addAttribute("viewStore", pictureList);
         model.addAttribute("idShopStore", idStore);

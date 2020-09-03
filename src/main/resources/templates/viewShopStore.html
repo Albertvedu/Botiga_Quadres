@@ -23,7 +23,7 @@
         </thead>
         <tbody >
         <tr th:each="picture:${viewStore}" >
-            <td th:text="${picture.idPicture}"></td>
+            <td th:text="${viewStore.indexOf(picture)}"></td>
             <td th:text="${picture.name}"></td>
             <td th:text="${picture.author}"></td>
             <td th:text="${picture.price}"></td>
